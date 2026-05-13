@@ -1,0 +1,32 @@
+/*
+ * Description: Basic LED Blinking program for AVR (e.g., ATmega328P).
+ * Hardware: LED connected to Pin PB0.
+ * Behavior: Toggles the LED on/off every 1000ms (1 second).
+ */
+
+#define F_CPU 16000000UL     // Define CPU frequency as 16MHz for delay accuracy
+#include <avr/io.h>          // Standard AVR I/O definitions
+#include <util/delay.h>      // Header for busy-wait delay functions
+
+int main(void)
+{ 
+    // Data Direction Register B: Set the 0th bit to 1 (Output)
+    // 0x01 in binary is 00000001
+    DDRB = 0x01; 
+
+    // Infinite loop to keep the LED blinking
+    while(1)
+    {
+        // Set PB0 to HIGH (Turn LED ON)
+        PORTB = 0x01;
+        
+        // Wait for 1000 milliseconds (1 second)
+        _delay_ms(1000);
+        
+        // Set PB0 to LOW (Turn LED OFF)
+        PORTB = 0x00;
+        
+        // Wait for another 1000 milliseconds
+        _delay_ms(1000);
+    }
+}
